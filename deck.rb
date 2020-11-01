@@ -11,4 +11,8 @@ class Deck
 		end
 		@cards.shuffle!
 	end
+
+	def give_card
+		@cards.pop
+	end
 end
