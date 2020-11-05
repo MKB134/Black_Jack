@@ -35,9 +35,7 @@ class Interface
     when '1'
       @game.player.take_card(@game.deck)
       show_information
-      if @game.player.score > 21
-        dealer_win
-      end
+      complete_round
     when '2'
       complete_round
     when '3'
