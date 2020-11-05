@@ -40,7 +40,7 @@ class Interface
       complete_round
     when '3'
       complete_round
-    when '4. следующий раунд'
+    when '4'
       new_round
     else
       puts 'Введена неправильная команда'
