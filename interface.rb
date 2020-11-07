@@ -1,11 +1,14 @@
 class Interface
-  attr_reader :deck
-  attr_accessor :game_bank
+  attr_reader :cards
+  attr_accessor :game_bank, :deck, :cards
 
 	def initialize
+    @cards = cards
+    @deck = deck
     @game_bank = Game::BET * 2
     @game = Game.new(introduction)
     start
+
   end
 
   def introduction
@@ -37,11 +40,12 @@ class Interface
       show_information
       complete_round
     when '2'
+      show_information
       complete_round
+      one_more_game
     when '3'
       complete_round
-    when '4'
-      new_round
+
     else
       puts 'Введена неправильная команда'
       step
@@ -55,17 +59,20 @@ class Interface
     puts "Карты диллера: #{@game.dealer.cards.map(&:face).join(' ')} | очки : #{@game.dealer.score}"
     if @game.dealer.score == @game.player.score
       puts "Ничья!"
-      player.increase_bank(@game_bank / 2)
-      dealer.increase_bank(@game_bank / 2)
+      @game.player.increase_bank(@game_bank / 2)
+      @dealer.increase_bank(@game_bank / 2)
     elsif @game.player.score == 21
       player_win
+      one_more_game
     elsif @game.dealer.score == 21
       dealer_win
+      one_more_game
     elsif @game.player.score < 21 && @game.dealer.score < 21
       @game.player.score > @game.dealer.score ? player_win : dealer_win
     else
       @game.player.score > @game.dealer.score ? dealer_win : player_win
     end
+    step
   end
 
   def player_win
@@ -79,7 +86,16 @@ class Interface
     puts "ВЫ проиграли!"
     puts "Ваш баланс: #{@game.player.bank}"
   end
-  def new_round
-    @game.first_round
+
+  def one_more_game
+    puts 'хотите еще раз сыграть? ( y / n )'
+    case gets.chomp
+    when 'y'
+      @deck = Deck.new
+      @game.player.clean_hand
+      @game.dealer.clean_hand
+    when 'n'
+      exit
+    end
   end
 end

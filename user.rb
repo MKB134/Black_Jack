@@ -1,6 +1,6 @@
 class User
-	attr_reader :cards, :bank, :name, :score
-
+	attr_reader  :bank, :name, :score
+	attr_accessor :cards
 	BANK_AMOUNT = 100
 
 	def initialize(name)
@@ -37,4 +37,7 @@ class User
 			@score -= 10 if @score > 21
 		end
 	end
+	def clean_hand
+    @cards = []
+  end
 end

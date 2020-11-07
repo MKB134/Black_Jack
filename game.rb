@@ -1,6 +1,5 @@
 class Game
-  attr_reader :player, :dealer, :deck
-
+  attr_reader :player, :dealer, :deck, :cards
   BET = 10
 
   def initialize(name)
@@ -16,5 +15,9 @@ class Game
     @dealer.take_card(@deck)
     @player.take_card(@deck)
     @dealer.take_card(@deck)
+  end
+  def player_clear_cards
+    @user.clean_hand
+    @dealer.clean_hand
   end
 end
