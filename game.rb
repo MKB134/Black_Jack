@@ -21,8 +21,8 @@ class Game
   end
 
   def player_clear_cards
-    @player.cards = []
-    @dealer.cards = []
+  @dealer.cards = []
+  @player.cards = []
   end
 
   def score_limit?(user)

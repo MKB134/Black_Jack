@@ -67,18 +67,19 @@ class Interface
   end
 
   def round_winner
-    puts "победил в этом раунде #{@game.winner.name}"
+    puts "Победил в этом раунде #{@game.winner.name}"
     puts "Ваши карты: #{@game.player.cards.map(&:face).join(' ')} | Очки: #{@game.player.score}"
     puts "Карты диллера: #{@game.dealer.cards.map(&:face).join(' ')} | очки : #{@game.dealer.score}"
     @game.money_to_winner
+    puts "Баланс Диллера: #{@game.dealer.bank}"
   end
 
   def one_more_game
     puts 'хотите еще раз сыграть? ( y / n )'
     case gets.chomp
     when 'y'
-      @deck = Deck.new
       @game.player_clear_cards
+      @game.first_round
       step
     when 'n'
       exit
