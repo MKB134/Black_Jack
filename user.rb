@@ -37,7 +37,4 @@ class User
 			@score -= 10 if @score > 21
 		end
 	end
-	def clean_hand
-    @cards = []
-  end
 end
