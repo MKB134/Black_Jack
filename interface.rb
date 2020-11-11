@@ -18,7 +18,6 @@ class Interface
 
   def start
     @game.first_round
-    show_information
     step
   end
 
@@ -34,35 +33,21 @@ class Interface
     puts "1. Взять карту"
     puts "2. Открыть карты"
     puts "3. Пропустить ход"
-    puts "4. Следующий раунд"
     case gets.chomp
     when '1'
       @game.player.take_card(@game.deck)
       show_information
-      complete_round
+      round_winner
+      one_more_game
     when '2'
-      complete_round
+      round_winner
       one_more_game
     when '3'
       show_information
-    when '4'
       one_more_game
     else
       puts 'Введена неправильная команда'
       step
-    end
-  end
-  # Завершает раунд
-  # 1. Выводить данные (показывает счёт и карты у диллера)
-  # 2. Определяет победителя (победителю начисляется выигрыш)
-  # 3. Перезапуск раунда (очищение всех карт, создание новой колоды
-  def complete_round
-    if @game.dealer.score == @game.player.score
-      puts "Ничья!"
-      @game.player.increase_bank(@game_bank / 2)
-      @game.dealer.increase_bank(@game_bank / 2)
-    elsif 
-      round_winner
     end
   end
 

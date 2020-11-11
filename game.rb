@@ -42,6 +42,10 @@ class Game
   def money_to_winner
     if winner
       winner.increase_bank(@game_bank)
-    end
+      else  
+        puts 'Ничья!'
+        @player.increase_bank(@game_bank / 2)
+        @dealer.increase_bank(@game_bank / 2)
+      end
   end
 end
