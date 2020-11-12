@@ -1,15 +1,16 @@
-class Card
+# frozen_string_literal: true
 
-	SUITS = %w[♠ ♥ ♣ ♦].freeze
-	VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'].freeze
+class Card
+  SUITS = %w[♠ ♥ ♣ ♦].freeze
+  VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'].freeze
 
   attr_reader :score, :suit, :value
 
-	def initialize(suit, value)
-		@suit = suit
-		@value = value
+  def initialize(suit, value)
+    @suit = suit
+    @value = value
     @score = calculate_score(value)
-	end
+  end
 
   def face
     "#{@suit}#{@value}"
@@ -31,4 +32,3 @@ class Card
     end
   end
 end
-

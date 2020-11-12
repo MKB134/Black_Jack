@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class Game
-  attr_reader :player, :dealer, :deck 
+  attr_reader :player, :dealer, :deck
   attr_accessor :cards, :game_bank, :bank
+
   BET = 10
 
   def initialize(name)
@@ -21,8 +24,8 @@ class Game
   end
 
   def player_clear_cards
-  @dealer.cards = []
-  @player.cards = []
+    @dealer.cards = []
+    @player.cards = []
   end
 
   def score_limit?(user)
@@ -30,11 +33,11 @@ class Game
   end
 
   def winner
-    if score_limit? (@player)
+    if score_limit?(@player)
       @dealer
-    elsif score_limit? (@dealer)
+    elsif score_limit?(@dealer)
       @player
-    elsif @player.score != @dealer.score 
+    elsif @player.score != @dealer.score
       [@player, @dealer].max_by(&:score)
     end
   end
@@ -42,10 +45,9 @@ class Game
   def money_to_winner
     if winner
       winner.increase_bank(@game_bank)
-      else  
-        puts 'Ничья!'
-        @player.increase_bank(@game_bank / 2)
-        @dealer.increase_bank(@game_bank / 2)
-      end
+    else
+      @player.increase_bank(@game_bank / 2)
+      @dealer.increase_bank(@game_bank / 2)
+    end
   end
 end

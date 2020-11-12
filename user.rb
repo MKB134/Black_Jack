@@ -1,40 +1,43 @@
+# frozen_string_literal: true
+
 class User
-	attr_reader  :bank, :name, :score
-	attr_accessor :cards
-	BANK_AMOUNT = 100
+  attr_reader :bank, :name, :score
+  attr_accessor :cards
 
-	def initialize(name)
-		@name = name
-		@score = 0
-		@cards = []
-		@bank = BANK_AMOUNT
-	end
+  BANK_AMOUNT = 100
 
-	def add_card(card)
-		@cards.push(card)
-	end
+  def initialize(name)
+    @name = name
+    @score = 0
+    @cards = []
+    @bank = BANK_AMOUNT
+  end
 
-	def increase_bank(bet)
-		@bank += bet
-	end
+  def add_card(card)
+    @cards.push(card)
+  end
 
-	def decrease_bank(bet)
-		@bank -= bet
-	end
+  def increase_bank(bet)
+    @bank += bet
+  end
 
-	def make_bet(bet)
-		decrease_bank(bet)
-	end
+  def decrease_bank(bet)
+    @bank -= bet
+  end
 
-	def take_card(deck)
-		@cards << deck.give_card
-		calculate_score
-	end
+  def make_bet(bet)
+    decrease_bank(bet)
+  end
 
-	def calculate_score
-		@score = @cards.sum(&:score)
-		@cards.select(&:ace?).each do |card|
-			@score -= 10 if @score > 21
-		end
-	end
+  def take_card(deck)
+    @cards << deck.give_card
+    calculate_score
+  end
+
+  def calculate_score
+    @score = @cards.sum(&:score)
+    @cards.select(&:ace?).each do |_card|
+      @score -= 10 if @score > 21
+    end
+  end
 end
